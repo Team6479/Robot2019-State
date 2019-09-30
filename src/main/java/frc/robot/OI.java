@@ -8,6 +8,8 @@
 package frc.robot;
 
 import com.team6479.lib.controllers.CBXboxController;
+import com.team6479.lib.controllers.CBXboxController.Buttons;
+import frc.robot.commands.IntakePush;
 
 /**
  * This class is the glue that binds the controls on the physical operator interface to the commands
@@ -17,5 +19,9 @@ public class OI {
   public CBXboxController xbox = new CBXboxController(0);
   // public CBXboxController xbox = new CBXboxController(0);
 
-  public OI() {}
+  public OI() {
+    // TODO: Run controls through driver
+    // xbox.getButton(Buttons.)
+    xbox.getButton(Buttons.kA).whenReleased(new IntakePush(0.5));
+  }
 }

@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TeleopIntakeElevator extends Command {
+public class TeleopIntakePivoter extends Command {
   private Button leftBumper;
   private Button rightBumper;
 
 
-  public TeleopIntakeElevator() {
-    requires(Robot.intakeElevator);
+  public TeleopIntakePivoter() {
+    requires(Robot.intakePivoter);
   }
 
   // Called just before this Command runs the first time
@@ -32,10 +32,10 @@ public class TeleopIntakeElevator extends Command {
   @Override
   protected void execute() {
     if(leftBumper.get()) {
-      Robot.intakeElevator.incerementHeight();
+      Robot.intakePivoter.incerementHeight();
     }
     else if(rightBumper.get()) {
-      Robot.intakeElevator.decrementHeight();
+      Robot.intakePivoter.decrementHeight();
     }
 
 
