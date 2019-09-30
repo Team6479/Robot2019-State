@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.IntakeElevator;
 
 /**
@@ -20,6 +21,7 @@ public class Robot extends TimedRobot {
   private RobotState robotState;
   public static OI oi;
   public static IntakeElevator intakeElevator;
+  public static Drivetrain drivetrain;
 
   public Robot() {
     robotState = new RobotState();
@@ -32,6 +34,7 @@ public class Robot extends TimedRobot {
     intakeElevator = new IntakeElevator(robotState);
 
     oi = new OI();
+    drivetrain = new Drivetrain();
   }
 
   @Override
