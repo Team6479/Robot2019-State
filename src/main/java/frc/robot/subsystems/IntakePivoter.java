@@ -18,9 +18,7 @@ import frc.robot.Robot.PivotState;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleopIntakePivoter;
 
-/**
- * Add your docs here.
- */
+/** Add your docs here. */
 public class IntakePivoter extends Subsystem {
   private TalonSRX motor1 = new TalonSRX(RobotMap.INTAKE_PIVOTER_MOTOR_1);
   private TalonSRX motor2 = new TalonSRX(RobotMap.INTAKE_PIVOTER_MOTOR_2);
@@ -71,33 +69,40 @@ public class IntakePivoter extends Subsystem {
     motor1.config_kF(0, 0);
 
     // Set hooks for Intake State changes
-    Robot.intakeState.addStateHooks(IntakeState.BALL, new Runnable(){
-      @Override
-      public void run() {
-        elevatorHeights = new double[] {0, 0, 0, 0};
-      }
-    });
-    Robot.intakeState.addStateHooks(IntakeState.HATCH, new Runnable(){
-      @Override
-      public void run() {
-        elevatorHeights = new double[] {0, 0, 0};
-      }
-    });
+    Robot.intakeState.addStateHooks(
+        IntakeState.BALL,
+        new Runnable() {
+          @Override
+          public void run() {
+            elevatorHeights = new double[] {0, 0, 0, 0};
+          }
+        });
+    Robot.intakeState.addStateHooks(
+        IntakeState.HATCH,
+        new Runnable() {
+          @Override
+          public void run() {
+            elevatorHeights = new double[] {0, 0, 0};
+          }
+        });
 
     // Set hooks for Pivot State changes
-    Robot.pivotState.addStateHooks(PivotState.NORMAL, new Runnable(){
-      @Override
-      public void run() {
-        setInverted(false);
-      }
-    });
-    Robot.pivotState.addStateHooks(PivotState.INVERTED, new Runnable(){
-      @Override
-      public void run() {
-        setInverted(true);
-      }
-    });
-
+    Robot.pivotState.addStateHooks(
+        PivotState.NORMAL,
+        new Runnable() {
+          @Override
+          public void run() {
+            setInverted(false);
+          }
+        });
+    Robot.pivotState.addStateHooks(
+        PivotState.INVERTED,
+        new Runnable() {
+          @Override
+          public void run() {
+            setInverted(true);
+          }
+        });
   }
 
   @Override

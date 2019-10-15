@@ -1,17 +1,15 @@
 package frc.robot.states;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
-/**
- * StateMachine
- */
+/** StateMachine */
 public class StateMachine<E extends Enum<E>> {
   private HashMap<E, HashMap<Subsystem, ArrayList<Runnable>>> stateHooks;
   private HashMap<E, Command> stateCommands;
@@ -57,14 +55,15 @@ public class StateMachine<E extends Enum<E>> {
     var hooks = stateHooks.get(state);
 
     for (Subsystem requires : hooks.keySet()) {
-      Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-          for (Runnable hook : hooks.get(requires)) {
-            hook.run();
-          }
-        }
-      };
+      Runnable runnable =
+          new Runnable() {
+            @Override
+            public void run() {
+              for (Runnable hook : hooks.get(requires)) {
+                hook.run();
+              }
+            }
+          };
 
       Command command = null;
       if (requires != null) {

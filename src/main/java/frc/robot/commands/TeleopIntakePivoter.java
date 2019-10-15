@@ -16,7 +16,6 @@ public class TeleopIntakePivoter extends Command {
   private Button leftBumper;
   private Button rightBumper;
 
-
   public TeleopIntakePivoter() {
     requires(Robot.intakePivoter);
   }
@@ -31,14 +30,11 @@ public class TeleopIntakePivoter extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(leftBumper.get()) {
+    if (leftBumper.get()) {
       Robot.intakePivoter.incerementHeight();
-    }
-    else if(rightBumper.get()) {
+    } else if (rightBumper.get()) {
       Robot.intakePivoter.decrementHeight();
     }
-
-
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -49,12 +45,10 @@ public class TeleopIntakePivoter extends Command {
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
-  }
+  protected void end() {}
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
-  }
+  protected void interrupted() {}
 }
