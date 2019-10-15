@@ -10,8 +10,10 @@ public class RobotMap {
   public static int INTAKE_MOTOR_LEFT = 0;
   public static int INTAKE_MOTOR_RIGHT = 0;
 
-  public static int INTAKE_SOLENOID_GRABBER_1 = 0;
-  public static int INTAKE_SOLENOID_GRABBER_2 = 0;
+  public static int INTAKE_SOLENOID_GRABBER_RIGHT_1 = 0;
+  public static int INTAKE_SOLENOID_GRABBER_RIGHT_2 = 0;
+  public static int INTAKE_SOLENOID_GRABBER_LEFT_1 = 0;
+  public static int INTAKE_SOLENOID_GRABBER_LEFT_2 = 0;
   public static int INTAKE_SOLENOID_PUSHER_1 = 0;
   public static int INTAKE_SOLENOID_PUSHER_2 = 0;
 
