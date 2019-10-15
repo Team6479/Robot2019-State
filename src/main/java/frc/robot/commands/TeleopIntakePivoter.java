@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import com.team6479.lib.controllers.CBXboxController.Buttons;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
@@ -31,11 +32,24 @@ public class TeleopIntakePivoter extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double leftTrigger = Robot.oi.xbox.getTriggerAxis(Hand.kLeft);
+    double rightTrigger = Robot.oi.xbox.getTriggerAxis(Hand.kRight);
+
+    if (leftTrigger > 0 && !(rightTrigger > 0)) {
+      Robot.intakePivoter.setHeightPercent(leftTrigger);
+      return;
+    } else if (rightTrigger > 0 && !(leftTrigger > 0)) {
+      Robot.intakePivoter.setHeightPercent(rightTrigger);
+      return;
+    }
+
     if(leftBumper.get()) {
       Robot.intakePivoter.incerementHeight();
+      Robot.intakePivoter.setHeightMotionMagic(Robot.intakePivoter.getTargetHeight());
     }
     else if(rightBumper.get()) {
       Robot.intakePivoter.decrementHeight();
+      Robot.intakePivoter.setHeightMotionMagic(Robot.intakePivoter.getTargetHeight());
     }
 
 

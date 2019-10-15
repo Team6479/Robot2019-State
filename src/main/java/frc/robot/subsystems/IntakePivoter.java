@@ -44,7 +44,7 @@ public class IntakePivoter extends Subsystem {
     motor2.setNeutralMode(NeutralMode.Brake);
 
     // Configure encoder
-    motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+    motor1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute , 0, 0);
 
     // Set sensor phase
     motor1.setSensorPhase(true);
@@ -110,12 +110,16 @@ public class IntakePivoter extends Subsystem {
     isInverted = bool;
   }
 
-  public double getHeight() {
+  public double getTargetHeight() {
     return elevatorHeights[elevatorHeightIndex];
   }
 
-  public void setHeight(double height) {
+  public void setHeightMotionMagic(double height) {
     motor1.set(ControlMode.MotionMagic, height);
+  }
+
+  public void setHeightPercent(double percent) {
+    motor1.set(ControlMode.PercentOutput, percent);
   }
 
   public void setHeightIndex(int index) {
@@ -131,13 +135,25 @@ public class IntakePivoter extends Subsystem {
   }
 
   public void incerementHeight() {
+    // Increment and Decrement are effectivly flipped when inverted
+    // This is how we show this
     int value = (isInverted) ? 1 : -1;
     setHeightIndex(elevatorHeightIndex + value);
   }
 
   public void decrementHeight() {
+    // Increment and Decrement are effectivly flipped when inverted
+    // This is how we show this
     int value = (isInverted) ? -1 : 1;
     setHeightIndex(elevatorHeightIndex + value);
+  }
+
+  private double unitsToAngle(double units) {
+    return 0;
+  }
+
+  private double angleToUnits(double angle) {
+    return 0;
   }
 
   private void zeroSensors() {
