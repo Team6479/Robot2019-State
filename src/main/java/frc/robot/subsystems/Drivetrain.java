@@ -7,11 +7,10 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleopDrive;
 
@@ -19,35 +18,30 @@ import frc.robot.commands.TeleopDrive;
  * Add your docs here.
  */
 public class Drivetrain extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-  private SpeedController leftFront;
-  private SpeedController rightFront;
-  private SpeedController leftBack;
-  private SpeedController rightBack;
+  private TalonSRX leftFront = new TalonSRX(RobotMap.DT_LEFT_FRONT);
+  private TalonSRX leftBack = new TalonSRX(RobotMap.DT_LEFT_BACK);
+  private TalonSRX rightFront = new TalonSRX(RobotMap.DT_RIGHT_FRONT);
+  private TalonSRX rightBack = new TalonSRX(RobotMap.DT_RIGHT_BACK);
 
-  private SpeedControllerGroup left;
-  private SpeedControllerGroup right;
-
-  private DifferentialDrive drive;
-  public Drivetrain(){
-    leftFront = new Spark(RobotMap.DT_LEFT_FRONT);
-    rightFront = new Spark(RobotMap.DT_RIGHT_FRONT);
-    leftBack = new Spark(RobotMap.DT_LEFT_BACK);
-    rightBack = new Spark(RobotMap.DT_RIGHT_BACK);
-
-    left = new SpeedControllerGroup(leftFront, leftBack);
-    right = new SpeedControllerGroup(rightFront, rightBack);
-
-    drive = new DifferentialDrive(left, right);
+  public Drivetrain() {
+    leftBack.follow(leftFront);
+    rightBack.follow(rightFront);
   }
-  public DifferentialDrive getDrive(){
-    return drive;
-  }
-  @Override
+
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new TeleopDrive());
   }
+
+  public void arcadeDrive(double speed, double turn) {
+    leftFront.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, +turn);
+    rightFront.set(ControlMode.PercentOutput, speed, DemandType.ArbitraryFeedForward, -turn);
+  }
+
+  public void tankDrive(double leftSpeed, double rightSpeed) {
+    leftFront.set(ControlMode.PercentOutput, leftSpeed);
+    rightFront.set(ControlMode.PercentOutput, rightSpeed);
+  }
+
 }

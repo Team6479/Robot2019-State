@@ -26,7 +26,7 @@ public class TeleopDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.getDrive().arcadeDrive(Robot.oi.xbox.getY(Hand.kLeft), Robot.oi.xbox.getX(Hand.kRight));
+    Robot.drivetrain.arcadeDrive(Robot.oi.xbox.getY(Hand.kLeft), Robot.oi.xbox.getX(Hand.kRight));
   }
 
   // Make this return true when this Command no longer needs to run execute()
