@@ -8,30 +8,45 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import frc.robot.commands.IntakeStateTracker;
+import frc.robot.states.StateMachine;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.IntakeElevator;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakePivoter;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
-  private RobotState robotState;
+  public enum IntakeState {
+    BALL, HATCH
+  }
+
+  public enum PivotState {
+    NORMAL, INVERTED
+  }
+
+  public static StateMachine<IntakeState> intakeState;
+  public static StateMachine<PivotState> pivotState;
   public static OI oi;
-  public static IntakeElevator intakeElevator;
   public static Drivetrain drivetrain;
+  public static Intake intake;
+  public static IntakePivoter intakePivoter;
 
   public Robot() {
-    robotState = new RobotState();
   }
 
   @Override
   public void robotInit() {
-    robotState.setRobotState(RobotState.State.Ball);
+    intakeState = new StateMachine<>();
+    pivotState = new StateMachine<>();
 
-    intakeElevator = new IntakeElevator(robotState);
+    new IntakeStateTracker().start();
+
+    intake = new Intake();
+    intakePivoter = new IntakePivoter();
 
     oi = new OI();
     drivetrain = new Drivetrain();
