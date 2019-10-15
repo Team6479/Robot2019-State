@@ -14,9 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.TeleopDrive;
 
-/**
- * Add your docs here.
- */
+/** Add your docs here. */
 public class Drivetrain extends Subsystem {
   private TalonSRX leftFront = new TalonSRX(RobotMap.DT_LEFT_FRONT);
   private TalonSRX leftBack = new TalonSRX(RobotMap.DT_LEFT_BACK);
@@ -43,5 +41,4 @@ public class Drivetrain extends Subsystem {
     leftFront.set(ControlMode.PercentOutput, leftSpeed);
     rightFront.set(ControlMode.PercentOutput, rightSpeed);
   }
-
 }

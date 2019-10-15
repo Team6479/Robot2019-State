@@ -10,13 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
+/** Add your docs here. */
 public class IntakePush extends TimedCommand {
-  /**
-   * Add your docs here.
-   */
+  /** Add your docs here. */
   public IntakePush(double timeout) {
     super(timeout);
     // Use requires() here to declare subsystem dependencies
@@ -32,8 +28,7 @@ public class IntakePush extends TimedCommand {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-  }
+  protected void execute() {}
 
   // Called once after timeout
   @Override

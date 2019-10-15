@@ -14,9 +14,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-/**
- * Add your docs here.
- */
+/** Add your docs here. */
 public class Intake extends Subsystem {
   private Spark leftMotor;
   private Spark rightMotor;
@@ -32,8 +30,10 @@ public class Intake extends Subsystem {
 
     motors = new SpeedControllerGroup(leftMotor, rightMotor);
 
-    grabberPiston = new DoubleSolenoid(RobotMap.INTAKE_SOLENOID_GRABBER_1, RobotMap.INTAKE_SOLENOID_GRABBER_2);
-    pusherPiston = new DoubleSolenoid(RobotMap.INTAKE_SOLENOID_PUSHER_1, RobotMap.INTAKE_SOLENOID_PUSHER_2);
+    grabberPiston =
+        new DoubleSolenoid(RobotMap.INTAKE_SOLENOID_GRABBER_1, RobotMap.INTAKE_SOLENOID_GRABBER_2);
+    pusherPiston =
+        new DoubleSolenoid(RobotMap.INTAKE_SOLENOID_PUSHER_1, RobotMap.INTAKE_SOLENOID_PUSHER_2);
   }
 
   @Override
@@ -51,7 +51,7 @@ public class Intake extends Subsystem {
   }
 
   public void toggleOpenClose() {
-    if (grabberPiston.get() ==  Value.kForward) {
+    if (grabberPiston.get() == Value.kForward) {
       grabberPiston.set(Value.kReverse);
     } else {
       grabberPiston.set(Value.kForward);

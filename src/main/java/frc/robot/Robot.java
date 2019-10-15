@@ -21,11 +21,13 @@ import frc.robot.subsystems.IntakePivoter;
  */
 public class Robot extends TimedRobot {
   public enum IntakeState {
-    BALL, HATCH
+    BALL,
+    HATCH
   }
 
   public enum PivotState {
-    NORMAL, INVERTED
+    NORMAL,
+    INVERTED
   }
 
   public static StateMachine<IntakeState> intakeState;
@@ -35,8 +37,7 @@ public class Robot extends TimedRobot {
   public static Intake intake;
   public static IntakePivoter intakePivoter;
 
-  public Robot() {
-  }
+  public Robot() {}
 
   @Override
   public void robotInit() {
