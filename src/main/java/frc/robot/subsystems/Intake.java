@@ -7,31 +7,42 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /** Add your docs here. */
 public class Intake extends Subsystem {
-  private Spark leftMotor;
-  private Spark rightMotor;
-  private SpeedControllerGroup motors;
-  private DoubleSolenoid grabberPiston;
+  private VictorSPX leftMotor;
+  private VictorSPX rightMotor;
+  private DoubleSolenoid grabberPistonRight;
+  private DoubleSolenoid grabberPistonLeft;
   private DoubleSolenoid pusherPiston;
 
   public Intake() {
-    leftMotor = new Spark(RobotMap.INTAKE_MOTOR_LEFT);
-    rightMotor = new Spark(RobotMap.INTAKE_MOTOR_RIGHT);
+    leftMotor = new VictorSPX(RobotMap.INTAKE_MOTOR_LEFT);
+    rightMotor = new VictorSPX(RobotMap.INTAKE_MOTOR_RIGHT);
+
+    rightMotor.configFactoryDefault();
+    leftMotor.configFactoryDefault();
+
+    rightMotor.follow(leftMotor);
 
     rightMotor.setInverted(true);
 
-    motors = new SpeedControllerGroup(leftMotor, rightMotor);
+    rightMotor.setNeutralMode(NeutralMode.Brake);
+    leftMotor.setNeutralMode(NeutralMode.Brake);
 
-    grabberPiston =
-        new DoubleSolenoid(RobotMap.INTAKE_SOLENOID_GRABBER_1, RobotMap.INTAKE_SOLENOID_GRABBER_2);
+    grabberPistonRight =
+        new DoubleSolenoid(
+            RobotMap.INTAKE_SOLENOID_GRABBER_RIGHT_1, RobotMap.INTAKE_SOLENOID_GRABBER_RIGHT_2);
+    grabberPistonLeft =
+        new DoubleSolenoid(
+            RobotMap.INTAKE_SOLENOID_GRABBER_LEFT_1, RobotMap.INTAKE_SOLENOID_GRABBER_LEFT_2);
     pusherPiston =
         new DoubleSolenoid(RobotMap.INTAKE_SOLENOID_PUSHER_1, RobotMap.INTAKE_SOLENOID_PUSHER_2);
   }
@@ -43,27 +54,31 @@ public class Intake extends Subsystem {
   }
 
   public void open() {
-    grabberPiston.set(Value.kForward);
+    grabberPistonRight.set(Value.kForward);
+    grabberPistonLeft.set(Value.kForward);
   }
 
   public void close() {
-    grabberPiston.set(Value.kReverse);
+    grabberPistonRight.set(Value.kReverse);
+    grabberPistonLeft.set(Value.kReverse);
   }
 
   public void toggleOpenClose() {
-    if (grabberPiston.get() == Value.kForward) {
-      grabberPiston.set(Value.kReverse);
+    if (grabberPistonRight.get() == Value.kForward && grabberPistonLeft.get() == Value.kForward) {
+      grabberPistonRight.set(Value.kReverse);
+      grabberPistonLeft.set(Value.kReverse);
     } else {
-      grabberPiston.set(Value.kForward);
+      grabberPistonRight.set(Value.kForward);
+      grabberPistonLeft.set(Value.kForward);
     }
   }
 
   public void intake() {
-    motors.set(1);
+    leftMotor.set(ControlMode.PercentOutput, 1);
   }
 
   public void eject() {
-    motors.set(-1);
+    leftMotor.set(ControlMode.PercentOutput, -1);
   }
 
   public void push() {
