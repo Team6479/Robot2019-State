@@ -37,9 +37,14 @@ public class Intake extends Subsystem {
     rightMotor.setNeutralMode(NeutralMode.Brake);
     leftMotor.setNeutralMode(NeutralMode.Brake);
 
-    grabberPistonRight = new DoubleSolenoid(RobotMap.INTAKE_SOLENOID_GRABBER_RIGHT_1, RobotMap.INTAKE_SOLENOID_GRABBER_RIGHT_2);
-    grabberPistonLeft = new DoubleSolenoid(RobotMap.INTAKE_SOLENOID_GRABBER_LEFT_1, RobotMap.INTAKE_SOLENOID_GRABBER_LEFT_2);
-    pusherPiston = new DoubleSolenoid(RobotMap.INTAKE_SOLENOID_PUSHER_1, RobotMap.INTAKE_SOLENOID_PUSHER_2);
+    grabberPistonRight =
+        new DoubleSolenoid(
+            RobotMap.INTAKE_SOLENOID_GRABBER_RIGHT_1, RobotMap.INTAKE_SOLENOID_GRABBER_RIGHT_2);
+    grabberPistonLeft =
+        new DoubleSolenoid(
+            RobotMap.INTAKE_SOLENOID_GRABBER_LEFT_1, RobotMap.INTAKE_SOLENOID_GRABBER_LEFT_2);
+    pusherPiston =
+        new DoubleSolenoid(RobotMap.INTAKE_SOLENOID_PUSHER_1, RobotMap.INTAKE_SOLENOID_PUSHER_2);
   }
 
   @Override
